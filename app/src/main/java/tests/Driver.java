@@ -14,45 +14,104 @@ import java.io.FileReader;
 import java.io.IOException;
 import models.PostalCode;
 
+import java.util.*;
+
 /**
  *
  * @author steve
  */
 public class Driver {
-    
+
     public static void main(String[] args) {
         Driver tester = new Driver();
-        tester.testParse();
+        PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
+        //tester.testDistanceTo(pcController.getPostalCodes().get("H7W"),pcController.getPostalCodes().get("H7L"));
     }
-    
+
     void testParse(){
         try{
             String csvPath = getClass().getResource("/csv/zipcodes.csv").getPath();
             CSVReader reader = new CSVReaderBuilder(new FileReader(csvPath)).build();
             PostalCodeController pcController = new PostalCodeController(csvPath);
-            
+
             String[] nextLine;
             while((nextLine = reader.readNext()) != null){
                 PostalCode pc = new PostalCode();
-                pc.setId(Integer.valueOf(nextLine[0]));
-                pc.setLatitude(Float.parseFloat(nextLine[5]));
-                pc.setLongitude(Float.parseFloat(nextLine[6]));
-                pc.setCountry(nextLine[1]);
-                pc.setProvince(nextLine[4]);
-                pc.setPostalCode(nextLine[2]);
-                pcController.getPostalCodes().put(nextLine[2], pc);
+                if(nextLine.length == 7){
+                    pc.setId(Integer.parseInt(nextLine[0]));
+                    pc.setCountry(nextLine[1]);
+                    pc.setPostalCode(nextLine[2]);
+                    pc.setProvince(nextLine[4]);
+                    pc.setLatitude(Float.parseFloat(nextLine[5]));
+                    pc.setLongitude(Float.parseFloat(nextLine[6]));
+                    pcController.getPostalCodes().put(nextLine[2], pc);
+                }
+                else if(nextLine.length == 8){{
+                    pc.setId(Integer.parseInt(nextLine[0]));
+                    pc.setCountry(nextLine[1]);
+                    pc.setPostalCode(nextLine[2]);
+                    pc.setProvince(nextLine[5]);
+                    pc.setLatitude(Float.parseFloat(nextLine[6]));
+                    pc.setLongitude(Float.parseFloat(nextLine[7]));
+                    pcController.getPostalCodes().put(nextLine[2], pc);
+                }
+                }
+                else if(nextLine.length == 9){
+                    pc.setId(Integer.parseInt(nextLine[0]));
+                    pc.setCountry(nextLine[1]);
+                    pc.setPostalCode(nextLine[2]);
+                    pc.setProvince(nextLine[6]);
+                    pc.setLatitude(Float.parseFloat(nextLine[7]));
+                    pc.setLongitude(Float.parseFloat(nextLine[8]));
+                    pcController.getPostalCodes().put(nextLine[2], pc);
+                }
             }
-            System.out.println(pcController.getPostalCodes().get("H1Z"));
-            
         }
         catch(CsvValidationException | IOException e){
             System.out.println("An error occured " + e);
         }
     }
-    
-    void testDistanceTo(String postalCode){
+
+    double testDistanceTo(PostalCode from, PostalCode to){
+        PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
+        try {
+            final int radius = 6371;
+            double lat1 = pcController.getPostalCodes().get(from.getPostalCode()).getLatitude();
+            double lat2 = pcController.getPostalCodes().get(to.getPostalCode()).getLatitude();
+            double lon1 = pcController.getPostalCodes().get(from.getPostalCode()).getLongitude();
+            double lon2 = pcController.getPostalCodes().get(to.getPostalCode()).getLongitude();
+            double lat1Rad = Math.toRadians(lat1);
+            double lat2Rad = Math.toRadians(lat2);
+            double lat1Diff = Math.toRadians(lat2 - lat1);
+            double lat2Diff = Math.toRadians(lon2 - lon1);
+            double a = Math.sin(lat1Diff / 2) * Math.sin(lat1Diff / 2) + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.sin(lat2Diff / 2) * Math.sin(lat2Diff / 2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return radius*c;
+        }
+        catch(Exception e){
+            System.out.println("An error occured " + e);
+        }
+        return 0.0;
     }
-    
-    void testNearbyLocations(String postalCode){
+
+    void testNearbyLocations(PostalCode from){
+        PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
+        try{
+            double radius = 100.0;
+            ArrayList<PostalCode> nearbyPostalCodes = new ArrayList<>();
+            for(PostalCode pc : pcController.getPostalCodes().values()){
+                double distance = testDistanceTo(from, pc);
+                if(distance <= radius){
+                    nearbyPostalCodes.add(pc);
+                }
+            }
+
+            System.out.println("Locations nearby within a range of " + radius + "km" + "\n" + nearbyPostalCodes);
+
+        }
+        catch(InputMismatchException e){
+            System.out.println("An error occured " + e);
+        }
     }
+
 }

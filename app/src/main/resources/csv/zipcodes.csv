@@ -163,7 +163,7 @@
 237,ca,V0K,Cariboo and West Okanagan (100 Mile House),BC,50.7372,-121.271
 238,ca,V0L,Chilcotin (Alexis Creek),BC,52.4018,-124.023
 239,ca,V0M,Harrison Lake Region (Agassiz),BC,49.2341,-121.771
-240,ca,V0N,North Island Sunshine Coast and Southern Gulf Islands (Whistler),BC,50.5899,-126.952
+240,ca,V0N,North Island, Sunshine Coast, and Southern Gulf Islands (Whistler),BC,50.5899,-126.952
 241,ca,V0P,North Central Island and Bute Inlet Region (Gold River),BC,50.898,-124.863
 242,ca,V0R,Central Island (Chemainus),BC,49.2818,-126.063
 243,ca,V0S,Juan de Fuca Shore (Sooke),BC,48.5788,-123.464
@@ -410,16 +410,16 @@
 484,ca,E1C,Moncton Central,NB,46.0888,-64.7723
 485,ca,E1E,Moncton West,NB,46.0599,-64.844
 486,ca,E1G,Moncton Northwest,NB,46.1117,-64.834
-487,ca,E1H,Lakeville  Shediac Bridge,NB,46.1506,-64.6799
+487,ca,E1H,Lakeville, Shediac Bridge,NB,46.1506,-64.6799
 488,ca,E1J,Coverdale,NB,45.9829,-64.8634
 489,ca,E1N,Miramichi South,NB,47.0155,-65.5071
 490,ca,E1V,Miramichi North,NB,47.0085,-65.5833
 491,ca,E1W,Caraquet,NB,47.7624,-65.0324
 492,ca,E1X,Tracadie-Sheila,NB,47.4883,-64.9189
 493,ca,E2A,Bathurst,NB,47.6605,-65.6414
-494,ca,E2E,Rothesay Quispamsis,NB,45.4165,-65.9913
+494,ca,E2E,Rothesay, Quispamsis,NB,45.4165,-65.9913
 495,ca,E2G,Quispamsis,NB,45.4397,-65.9392
-496,ca,E2H,Saint John Northeast Renforth,NB,45.3481,-66.0186
+496,ca,E2H,Saint John Northeast, Renforth,NB,45.3481,-66.0186
 497,ca,E2J,Saint John East,NB,45.286,-66.0421
 498,ca,E2K,Saint John North,NB,45.2746,-66.0871
 499,ca,E2L,Saint John Central,NB,45.2742,-66.0645
@@ -431,7 +431,7 @@
 505,ca,E2V,Oromocto,NB,45.8509,-66.467
 506,ca,E3A,Fredericton North,NB,45.9784,-66.6905
 507,ca,E3B,Fredericton South New Brunswick Provincial Government,NB,45.9535,-66.6704
-508,ca,E3C,Fredericton Southwest New Maryland,NB,45.9356,-66.6609
+508,ca,E3C,Fredericton Southwest, New Maryland,NB,45.9356,-66.6609
 509,ca,E3E,Kingsclear,NB,45.8134,-66.932
 510,ca,E3L,St. Stephen,NB,45.1728,-67.2946
 511,ca,E3N,Campbellton,NB,48.0091,-66.6707
@@ -628,12 +628,12 @@
 702,ca,B9A,Port Hawkesbury,NS,45.612,-61.3486
 703,ca,K0A,National Capital Region (Almonte),ON,45.1953,-76.1496
 704,ca,K0B,Prescott and Russell United Counties (Alfred),ON,45.4131,-74.9148
-705,ca,K0C,Stormont Dundas and Glengarry United Counties (Alexandria),ON,45.2228,-75.032
+705,ca,K0C,Stormont, Dundas and Glengarry United Counties (Alexandria),ON,45.2228,-75.032
 706,ca,K0E,South Leeds and Grenville United Counties (Prescott),ON,44.6478,-75.7656
 707,ca,K0G,Rideau Lakes area (Kemptville),ON,45.0113,-75.6459
-708,ca,K0H,Frontenac County Addington County Loyalist Shores and Southwest Leeds (Inverary),ON,44.2166,-76.6455
+708,ca,K0H,Frontenac County, Addington County, Loyalist Shores and Southwest Leeds (Inverary),ON,44.2166,-76.6455
 709,ca,K0J,Renfrew County and Lanark Highlands Township (Deep River),ON,45.3985,-78.0836
-710,ca,K0K,Quinte Shores East Northumberland County & Prince Edward County (Picton),ON,44.0594,-77.386
+710,ca,K0K,Quinte Shores, East Northumberland County & Prince Edward County (Picton),ON,44.0594,-77.386
 711,ca,K0L,Peterborough County and North Hastings County (Lakefield),ON,44.8324,-77.9302
 712,ca,K0M,Kawartha lakes and Haliburton County (Bobcaygeon),ON,44.438,-78.6828
 713,ca,K1A,Government of Canada Ottawa and Gatineau offices,ON,45.4207,-75.7023
@@ -1099,7 +1099,7 @@
 1173,ca,P0J,Timiskaming South (Temiskaming Shores),ON,47.6756,-79.5424
 1174,ca,P0K,Timiskaming North (Iroquois Falls A),ON,48.1346,-80.0769
 1175,ca,P0L,Cochrane Region (Hearst),ON,52.923,-82.4173
-1176,ca,P0M,Algoma Sudbury District and Greater Sudbury (Chelmsford),ON,46.1329,-80.8231
+1176,ca,P0M,Algoma, Sudbury District and Greater Sudbury (Chelmsford),ON,46.1329,-80.8231
 1177,ca,P0N,Timmins Region (South Porcupine),ON,48.4466,-80.8161
 1178,ca,P0P,Manitoulin (Little Current),ON,46.0182,-82.2507
 1179,ca,P0R,Algoma Southwest (Blind River),ON,46.1849,-82.8228

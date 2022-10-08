@@ -67,7 +67,7 @@ public class PostalCode {
 
     @Override
     public String toString() {
-        return "Data for postal code " + postalCode + ": " + "\nContry: " + country + "\nProvince: " + province + "\nLatitude: " + latitude + "\nLongitude: " + longitude;
+        return "Data for postal code " + postalCode + ": " + "\nContry: " + country + "\nProvince: " + province + "\nLatitude: " + latitude + "\nLongitude: " + longitude + "\n";
     }
     
     
