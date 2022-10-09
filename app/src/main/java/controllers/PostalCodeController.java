@@ -8,6 +8,8 @@ package controllers;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -89,12 +91,49 @@ public class PostalCodeController {
             return radius*c;
         }
         catch(Exception e){
-            System.out.println("An error occured " + e);
+            System.out.println("An error occurred in PostalCodeController.distanceTo() \n" + e);
         }
         return 0.0;
     }
-    
-    public static HashMap<String, PostalCode> nearbyLocations(PostalCode from){
+
+    /*
+    * This method will return nearby postal codes to the inputted postal code within a user-defined radius. Now, the
+    * commented-out code is used to sort out the distances between the inputted postal code and the other postal codes.
+    * This is because a HashMap is not able to respect the insertion order.
+     */
+    public static HashMap<PostalCode, Double> nearbyLocations(PostalCode from){
+        PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
+        try{
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter a desired radius in km: ");
+            double radius = sc.nextDouble();
+            HashMap<PostalCode, Double> nearbyPostalMap = new HashMap<>();
+//            ArrayList<Double> distances = new ArrayList<>();
+//            HashMap<PostalCode, Double> sortedNearbyPostalMap = new HashMap<>();
+            for(PostalCode pc : pcController.getPostalCodes().values()){
+                double distance = distanceTo(from, pc);
+                if(distance <= radius && distance != 0.0){
+                    nearbyPostalMap.put(pc, distance);
+                }
+            }
+            return nearbyPostalMap;
+
+//            for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
+//                distances.add(entry.getValue());
+//            }
+//            Collections.sort(distances);
+//            for(Double d : distances){
+//                for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
+//                    if(Objects.equals(entry.getValue(), d)){
+//                        sortedNearbyPostalMap.put(entry.getKey(), entry.getValue());
+//                        System.out.println("Postal Code: " + entry.getKey().getPostalCode() + " - Distance: " + entry.getValue());
+//                    }
+//                }
+//            }
+        }
+        catch(InputMismatchException e){
+            System.out.println("An error occured " + e);
+        }
         return null;
     }
 

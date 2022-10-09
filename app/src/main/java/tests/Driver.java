@@ -24,8 +24,8 @@ public class Driver {
 
     public static void main(String[] args) {
         Driver tester = new Driver();
-        PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
-        //tester.testDistanceTo(pcController.getPostalCodes().get("H7W"),pcController.getPostalCodes().get("H7L"));
+        PostalCode pcTest = new PostalCodeController("/csv/zipcodes.csv").getPostalCodes().get("H7L");
+        tester.testNearbyLocations(pcTest);
     }
 
     void testParse(){
@@ -94,20 +94,41 @@ public class Driver {
         return 0.0;
     }
 
+    /*
+    * This method will test the nearby locations method. However, commented-out code is used to sort out the HashMap. It is to note that HashMaps
+    * do not respect the order of insertion. Therefore, the HashMap must be sorted in order to get the closest locations.
+     */
     void testNearbyLocations(PostalCode from){
         PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
         try{
-            double radius = 100.0;
-            ArrayList<PostalCode> nearbyPostalCodes = new ArrayList<>();
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter a desired radius in km: ");
+            double radius = sc.nextDouble();
+            HashMap<PostalCode, Double> nearbyPostalMap = new HashMap<>();
+//            ArrayList<Double> distances = new ArrayList<>();
+//            HashMap<PostalCode, Double> sortedNearbyPostalMap = new HashMap<>();
             for(PostalCode pc : pcController.getPostalCodes().values()){
                 double distance = testDistanceTo(from, pc);
-                if(distance <= radius){
-                    nearbyPostalCodes.add(pc);
+                if(distance <= radius && distance != 0.0){
+                    nearbyPostalMap.put(pc, distance);
                 }
             }
 
-            System.out.println("Locations nearby within a range of " + radius + "km" + "\n" + nearbyPostalCodes);
+            System.out.println("Nearby postal codes to " + from.getPostalCode() + " are: ");
 
+//            for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
+//                distances.add(entry.getValue());
+//            }
+//            Collections.sort(distances);
+//            for(Double d : distances){
+//                for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
+//                    if(Objects.equals(entry.getValue(), d)){
+//                        sortedNearbyPostalMap.put(entry.getKey(), entry.getValue());
+//                        System.out.println("Postal Code: " + entry.getKey().getPostalCode() + " - Distance: " + entry.getValue());
+//                    }
+//                }
+//            }
+            System.out.println(nearbyPostalMap);
         }
         catch(InputMismatchException e){
             System.out.println("An error occured " + e);
