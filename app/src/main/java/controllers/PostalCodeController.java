@@ -26,30 +26,32 @@ public class PostalCodeController {
 
     public PostalCodeController(String csvFilePath) {
         this.csvFilePath = csvFilePath;
-        postalCodes = this.parse();
+        try{
+            postalCodes = this.parse();
+        }
+        catch(NullPointerException e){
+            System.out.println("NullPointerException occurred while parsing the CSV file.\n" + e);
+        }
     }
     
-    public HashMap<String, PostalCode> parse(){
+    public HashMap<String, PostalCode> parse() throws NullPointerException{
         try{
-            String csvPath = getClass().getResource("/csv/zipcodes.csv").getPath();
+            String csvPath = getClass().getResource(csvFilePath).getPath();
             CSVReader reader = new CSVReaderBuilder(new FileReader(csvPath)).build();
 
             String[] nextLine;
             while((nextLine = reader.readNext()) != null){
                 PostalCode pc = new PostalCode();
+                pc.setId(Integer.parseInt(nextLine[0]));
+                pc.setCountry(nextLine[1]);
+                pc.setPostalCode(nextLine[2]);
                 if(nextLine.length == 7){
-                    pc.setId(Integer.parseInt(nextLine[0]));
-                    pc.setCountry(nextLine[1]);
-                    pc.setPostalCode(nextLine[2]);
                     pc.setProvince(nextLine[4]);
                     pc.setLatitude(Float.parseFloat(nextLine[5]));
                     pc.setLongitude(Float.parseFloat(nextLine[6]));
                     this.getPostalCodes().put(nextLine[2], pc);
                 }
                 else if(nextLine.length == 8){{
-                    pc.setId(Integer.parseInt(nextLine[0]));
-                    pc.setCountry(nextLine[1]);
-                    pc.setPostalCode(nextLine[2]);
                     pc.setProvince(nextLine[5]);
                     pc.setLatitude(Float.parseFloat(nextLine[6]));
                     pc.setLongitude(Float.parseFloat(nextLine[7]));
@@ -57,9 +59,6 @@ public class PostalCodeController {
                 }
                 }
                 else if(nextLine.length == 9){
-                    pc.setId(Integer.parseInt(nextLine[0]));
-                    pc.setCountry(nextLine[1]);
-                    pc.setPostalCode(nextLine[2]);
                     pc.setProvince(nextLine[6]);
                     pc.setLatitude(Float.parseFloat(nextLine[7]));
                     pc.setLongitude(Float.parseFloat(nextLine[8]));
@@ -74,7 +73,7 @@ public class PostalCodeController {
         return null;
     }
     
-    public static double distanceTo(PostalCode from, PostalCode to){
+    public double distanceTo(PostalCode from, PostalCode to) throws IllegalArgumentException{
         PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
         try {
             final int radius = 6371;
@@ -96,20 +95,13 @@ public class PostalCodeController {
         return 0.0;
     }
 
-    /*
-    * This method will return nearby postal codes to the inputted postal code within a user-defined radius. Now, the
-    * commented-out code is used to sort out the distances between the inputted postal code and the other postal codes.
-    * This is because a HashMap is not able to respect the insertion order.
-     */
-    public static HashMap<PostalCode, Double> nearbyLocations(PostalCode from){
+    public HashMap<PostalCode, Double> nearbyLocations(PostalCode from) throws IllegalArgumentException{
         PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
         try{
             Scanner sc = new Scanner(System.in);
             System.out.println("Enter a desired radius in km: ");
             double radius = sc.nextDouble();
             HashMap<PostalCode, Double> nearbyPostalMap = new HashMap<>();
-//            ArrayList<Double> distances = new ArrayList<>();
-//            HashMap<PostalCode, Double> sortedNearbyPostalMap = new HashMap<>();
             for(PostalCode pc : pcController.getPostalCodes().values()){
                 double distance = distanceTo(from, pc);
                 if(distance <= radius && distance != 0.0){
@@ -118,18 +110,6 @@ public class PostalCodeController {
             }
             return nearbyPostalMap;
 
-//            for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
-//                distances.add(entry.getValue());
-//            }
-//            Collections.sort(distances);
-//            for(Double d : distances){
-//                for(Map.Entry<PostalCode, Double> entry : nearbyPostalMap.entrySet()){
-//                    if(Objects.equals(entry.getValue(), d)){
-//                        sortedNearbyPostalMap.put(entry.getKey(), entry.getValue());
-//                        System.out.println("Postal Code: " + entry.getKey().getPostalCode() + " - Distance: " + entry.getValue());
-//                    }
-//                }
-//            }
         }
         catch(InputMismatchException e){
             System.out.println("An error occured " + e);

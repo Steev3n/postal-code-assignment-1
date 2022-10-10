@@ -1,13 +1,9 @@
 package edu.vanier.template;
 
-import controllers.PostalCodeController;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.PostalCode;
+import ui.UIManager;
 
-import java.util.Scanner;
 
 /**
  * This is a JavaFX project template to be used for creating GUI applications.
@@ -19,17 +15,13 @@ import java.util.Scanner;
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception {
-//        VBox root = new VBox();
-//        Scene scene = new Scene(root, 300, 300);
-//        stage.setScene(scene);
-//        stage.setTitle("Postal Code Distance Calculator");
-//        stage.sizeToScene();
-//        stage.show();
-
+    public void start(Stage mainStage) throws Exception {
+        UIManager uimanager = new UIManager();
+        uimanager.mainWindow(mainStage);
     }
 
     public static void main(String[] args) {
-
+        launch(args);
     }
+
 }
