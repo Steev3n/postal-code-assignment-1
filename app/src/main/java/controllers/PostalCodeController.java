@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -95,12 +94,9 @@ public class PostalCodeController {
         return 0.0;
     }
 
-    public HashMap<PostalCode, Double> nearbyLocations(PostalCode from) throws IllegalArgumentException{
+    public HashMap<PostalCode, Double> nearbyLocations(PostalCode from, double radius) throws IllegalArgumentException{
         PostalCodeController pcController = new PostalCodeController("/csv/zipcodes.csv");
         try{
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Enter a desired radius in km: ");
-            double radius = sc.nextDouble();
             HashMap<PostalCode, Double> nearbyPostalMap = new HashMap<>();
             for(PostalCode pc : pcController.getPostalCodes().values()){
                 double distance = distanceTo(from, pc);
