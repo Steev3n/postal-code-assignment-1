@@ -21,12 +21,16 @@ public class PostalCode {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getCountry() {
         return country;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCountry(String country) {
@@ -41,9 +45,6 @@ public class PostalCode {
         this.postalCode = postalCode;
     }
 
-    public String getProvince() {
-        return province;
-    }
 
     public void setProvince(String province) {
         this.province = province;
